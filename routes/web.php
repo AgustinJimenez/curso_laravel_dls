@@ -24,6 +24,12 @@ Route::get('clientes',
     'uses' => 'ClientesController@index'
 ]);
 
+Route::post('clientes/index_ajax',
+[
+    'as' => 'clientes.index_ajax',
+    'uses' => 'ClientesController@index_ajax'
+]);
+
 Route::get('clientes/crear',
 [
     'as' => 'clientes.create',

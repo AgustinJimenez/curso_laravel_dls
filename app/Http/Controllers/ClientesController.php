@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class ClientesController extends Controller
 {
@@ -13,12 +14,52 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $algo = "cafe";
-        $perros = ["dobberman", "chiguagua", "bulldog"];
+        return view("clientes.index.index");
+    }
 
-        $clientes = \Cliente::get();
+    public function index_ajax(Request $request)
+    {
 
-        return view("clientes.index.index", compact('algo', 'perros', 'clientes'));
+        $clientes_query = \Cliente::query();
+
+        if( $request->has('razon_social') AND $request->razon_social != '' )
+            $clientes_query->where('razon_social', 'like', '%' . $request->razon_social . '%' );
+
+        if( $request->has('direccion') AND $request->direccion != '' )
+            $clientes_query->where('direccion', 'like', '%' . $request->direccion . '%' );
+/*
+        if( $request->fecha_fin and $request->has('fecha_fin') and $request->get('fecha_fin') != '' )
+            $query->where('fecha', '<=', \Carbon::createFromFormat( 'd/m/Y', $request->get('fecha_fin') )->format('Y-m-d') );
+
+        if( $request->has('titulo') and $request->get('titulo') != ''  )
+            $query->where('titulo', 'like', '%' . $request['titulo'] . '%' );
+*/
+        $object = Datatables::of( $clientes_query )
+        ->addColumn('acciones', function ($row)
+        {
+            return '
+                    <div class="btn-group">
+                    <a href="' . route('clientes.edit', [$row->id]) . '" class="btn btn-warning">EDITAR</a>
+
+                    <form action="' . route('clientes.destroy', [$row->id]) . '" method="POST">
+                        ' . csrf_field() . '
+                        <input type="hidden" name="_method" value="DELETE">
+
+                        <input type="submit" class="btn btn-danger boton-eliminar" value="ELIMINAR">
+
+                    </form>
+                
+                </div>  
+                    ';
+        })
+        ->setRowClass( function ($tabla) 
+        { 
+            return "text-center"; 
+        })
+        ->rawColumns(['acciones'])
+        ->make(true);
+        $data = $object->getData(true);
+        return response()->json( $data );
     }
 
     /**

@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $faker = Faker::create();
 
-        for($i = 0; $i<=1000; $i++)
+        for($i = 0; $i<=10000; $i++)
         {
             Cliente::create
             ([
                 'razon_social' => $faker->name,
-                'fecha_nacimiento' => $faker->date('Y-m-d', 'now'),
+                'fecha_nacimiento' => $faker->date('d/m/Y', 'now'),
                 'direccion' => $faker->streetAddress,
                 'comentario' => $faker->text(200),
                 'ruc' => $faker->numberBetween(100000, 999999),
