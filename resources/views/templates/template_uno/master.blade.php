@@ -13,6 +13,18 @@
     </head>
     <body>
         <div class="container">
+
+            @if($errors->any() )
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-group">
+                        @foreach ($errors->all() as $message) 
+                            <li class="list-group-item list-group-item-danger">{{ $message }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
             @yield('contenido')
         </div>
         <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>

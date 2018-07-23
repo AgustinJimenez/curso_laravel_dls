@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use App\Http\Requests\ClientesStoreRequest;
 
 class ClientesController extends Controller
 {
@@ -80,8 +81,9 @@ class ClientesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(ClientesStoreRequest $request)
+    {   
+
         \Cliente::create( $request->all() );
 
         return redirect()->route("clientes.index");
