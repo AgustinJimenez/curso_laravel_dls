@@ -70,6 +70,7 @@
 <script>
     var INPUT_RAZON_SOCIAL = $("#filtro-razon-social");
     var INPUT_DIRECCION = $("#filtro-direccion");
+    var BOTON_PROBAR_AJAX = $("#boton-mostar-ajax");
     
     $("body").on("click", ".boton-eliminar", function(event)
     {
