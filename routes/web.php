@@ -60,6 +60,13 @@ Route::delete('clientes/{id}/eliminar',
     'uses' => 'ClientesController@destroy'
 ]);
 
+Route::get('clientes/prueba_ajax',
+[
+    'as' => 'clientes.prueba_ajax',
+    'uses' => 'ClientesController@prueba_ajax',
+    'middleware' => 'verificacion-codigo-secreto'
+]);
+
 
 Route::get('foo', function () 
 {

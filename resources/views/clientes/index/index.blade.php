@@ -31,6 +31,11 @@
                 <input type="text" class="form-control" placeholder="Razon Social" id="filtro-direccion">  
             </div>
         </div>
+        <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-primary" id="boton-mostar-ajax">PROBAR AJAX</button>
+        </div>
+    </div>
 </div>
 
 <table class="table table-striped table-bordered table-hover" id="tabla-clientes">
@@ -55,6 +60,8 @@
         </tr>
     </tfoot>
 </table>
+
+
 @endsection
 
 @section('scripts')
@@ -83,6 +90,7 @@
                         formulario.submit();
                     }
                 },
+                
                 cancelar: 
                 {
                     btnClass: 'btn-blue',
@@ -91,6 +99,7 @@
                         
                     }
                 },
+
             }
         });
         
@@ -202,6 +211,22 @@
     INPUT_DIRECCION.keyup(function()
     {
         table.draw();
+    });
+
+    BOTON_PROBAR_AJAX.click(function()
+    {
+    
+        $.ajax
+        ({
+            url: "{{ route('clientes.prueba_ajax') }}?variable_uno=1&variable_dos=2",
+            headers: { codigo_secreto: "gatoo" },
+            success: function(respuesta)
+            {
+                console.log( respuesta );
+            }
+        });
+    
+    
     });
 
 </script>

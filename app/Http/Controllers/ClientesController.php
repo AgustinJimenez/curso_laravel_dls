@@ -139,4 +139,12 @@ class ClientesController extends Controller
 
         return redirect()->route("clientes.index");
     }
+
+
+    public function prueba_ajax(Request $re)
+    {
+
+        return response()->json( ['HOLA AQUI CONTROLADOR'] );
+    }
+
 }
