@@ -64,7 +64,7 @@
     var INPUT_RAZON_SOCIAL = $("#filtro-razon-social");
     var INPUT_DIRECCION = $("#filtro-direccion");
     
-    $(".boton-eliminar").click( function(event)
+    $("body").on("click", ".boton-eliminar", function(event)
     {
         var formulario = $(this).parent("form");
         
