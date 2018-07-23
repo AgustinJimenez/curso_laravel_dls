@@ -28,6 +28,9 @@ class ClientesController extends Controller
 
         if( $request->has('direccion') AND $request->direccion != '' )
             $clientes_query->where('direccion', 'like', '%' . $request->direccion . '%' );
+        
+        if( $request->has('activo') AND $request->activo != '' )
+            $clientes_query->where("activo", $request->activo);
 /*
         if( $request->fecha_fin and $request->has('fecha_fin') and $request->get('fecha_fin') != '' )
             $query->where('fecha', '<=', \Carbon::createFromFormat( 'd/m/Y', $request->get('fecha_fin') )->format('Y-m-d') );
@@ -52,6 +55,15 @@ class ClientesController extends Controller
                 
                 </div>  
                     ';
+        })
+        ->editColumn("activo", function($row)
+        {
+            return $row->activo ? 'SI' : 'NO' ;
+        })
+        ->editColumn("ruc", function($registro)
+        {
+                                //valor - cantidad decimales - separador decimal -separador mil
+            return number_format( $registro->ruc,0 ,'', '' );
         })
         ->setRowClass( function ($tabla) 
         { 

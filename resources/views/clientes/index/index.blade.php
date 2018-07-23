@@ -21,6 +21,16 @@
 <div class="row">
     <div class="col-md-2">
         <div class="form-group">
+            <label>Filtro por Activos:</label>
+            <select class="form-control" id="select-activo">
+                <option value="">TODOS</option>
+                <option value="1">SI</option>
+                <option value="0">NO</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
             <label>Filtro Razon Social:</label>
             <input type="text" class="form-control" placeholder="Razon Social" id="filtro-razon-social">  
         </div>
@@ -71,6 +81,7 @@
     var INPUT_RAZON_SOCIAL = $("#filtro-razon-social");
     var INPUT_DIRECCION = $("#filtro-direccion");
     var BOTON_PROBAR_AJAX = $("#boton-mostar-ajax");
+    var SELECT_ACTIVO = $("#select-activo");
     
     $("body").on("click", ".boton-eliminar", function(event)
     {
@@ -120,6 +131,7 @@
             {
                 request.razon_social = INPUT_RAZON_SOCIAL.val();
                 request.direccion = INPUT_DIRECCION.val();
+                request.activo = SELECT_ACTIVO.val();
                 /*
                 request.colegio_token = "{{ session()->get('colegio_token') }}",
                 request.titulo = INPUT_BUSCAR_POR_TITULO.val(),
@@ -213,6 +225,10 @@
     {
         table.draw();
     });
+    SELECT_ACTIVO.change(function()
+    {
+        table.draw();
+    })
 
     BOTON_PROBAR_AJAX.click(function()
     {

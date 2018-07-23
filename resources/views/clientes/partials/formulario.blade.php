@@ -4,7 +4,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>Razon Social</label>
-        <input type="text" class="form-control" name="razon_social" required="required" size="10" value="{{ $cliente->razon_social }}">
+            <input type="text" class="form-control" name="razon_social" required="required" size="10" value="{{ $cliente->razon_social }}">
         </div>
     </div>
 
