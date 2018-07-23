@@ -25,6 +25,33 @@
                     </div>
                 </div>
             @endif
+
+            @if( session()->has('success') )
+
+                <div class="alert alert-success fade in alert-dismissable">
+            
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+
+                    <ul>
+                        <li>{{ session()->get('success') }}</li>
+                    </ul>
+
+                </div>
+            @endif
+
+            @if( session()->has('error') )
+
+                <div class="alert alert-danger fade in alert-dismissable">
+            
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+
+                    <ul>
+                        <li>{{ session()->get('error') }}</li>
+                    </ul>
+
+                </div>
+            @endif
+
             @yield('contenido')
         </div>
         <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>

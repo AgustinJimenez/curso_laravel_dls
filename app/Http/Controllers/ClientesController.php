@@ -86,7 +86,7 @@ class ClientesController extends Controller
 
         \Cliente::create( $request->all() );
 
-        return redirect()->route("clientes.index");
+        return redirect()->route("clientes.index")->withSuccess( "El cliente se creo correctamente." );
     }
 
     /**
@@ -126,7 +126,7 @@ class ClientesController extends Controller
 
         $cliente->update( $request->all() );
 
-        return redirect()->route("clientes.index");
+        return redirect()->route("clientes.index")->withSuccess( "El cliente se creo correctamente." );
     }
 
     /**
