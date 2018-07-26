@@ -25,12 +25,12 @@ class ClientesStoreRequest extends FormRequest
     {
         return 
         [
-            'razon_social' => 'required|unique:clientes|max:60',
-            'ruc' => 'required|unique:clientes|max:15'
+            'razon_social' => 'required|unique:' . (new \Cliente)->getTable() . '|max:60',
+            'ruc' => 'required|unique:' . (new \Cliente)->getTable() . '|max:15'
         ];
     }
 
-    /**
+/**
  * Get the error messages for the defined validation rules.
  *
  * @return array

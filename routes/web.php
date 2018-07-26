@@ -60,6 +60,12 @@ Route::delete('clientes/{id}/eliminar',
     'uses' => 'ClientesController@destroy'
 ]);
 
+Route::delete('clientes/eliminar/ajax/{id}',
+[
+    'as' => 'clientes.destroy_ajax',
+    'uses' => 'ClientesController@destroy_ajax'
+]);
+
 Route::get('clientes/prueba_ajax',
 [
     'as' => 'clientes.prueba_ajax',

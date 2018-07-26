@@ -14,11 +14,11 @@
     <body>
         <div class="container">
 
-            @if($errors->any() )
+            @if( $errors->any() )
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="list-group">
-                        @foreach ($errors->all() as $message) 
+                        @foreach($errors->all() as $message) 
                             <li class="list-group-item list-group-item-danger">{{ $message }}</li>
                         @endforeach
                         </ul>
@@ -37,6 +37,7 @@
                     </ul>
 
                 </div>
+                
             @endif
 
             @if( session()->has('error') )

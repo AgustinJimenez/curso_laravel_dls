@@ -85,7 +85,7 @@
     
     $("body").on("click", ".boton-eliminar", function(event)
     {
-        var formulario = $(this).parent("form");
+        let id = $(this).attr("registro-id");
         
         $.confirm
         ({
@@ -99,7 +99,7 @@
                     btnClass: 'btn-red',
                     action: function () 
                     {
-                        formulario.submit();
+                        eliminar_registro( id );
                     }
                 },
                 
@@ -118,6 +118,27 @@
         event.preventDefault();
         
     } );
+
+    function eliminar_registro(id)
+    {
+
+            $.ajax
+            ({
+                type: "POST",
+                url: "{{ route('clientes.destroy_ajax',['']) }}/"+id,
+                data: { "_method":"DELETE" },
+                headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                success: function(response)
+                {
+                    table.draw();        
+                },
+                error: function(response)
+                {
+                    console.log(response);
+                
+                }
+            });
+        }
 
     
 

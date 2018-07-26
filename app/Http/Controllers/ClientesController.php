@@ -43,16 +43,8 @@ class ClientesController extends Controller
         {
             return '
                     <div class="btn-group">
-                    <a href="' . route('clientes.edit', [$row->id]) . '" class="btn btn-warning">EDITAR</a>
-
-                    <form action="' . route('clientes.destroy', [$row->id]) . '" method="POST">
-                        ' . csrf_field() . '
-                        <input type="hidden" name="_method" value="DELETE">
-
-                        <input type="submit" class="btn btn-danger boton-eliminar" value="ELIMINAR">
-
-                    </form>
-                
+                        <a href="' . route('clientes.edit', [$row->id]) . '" class="btn btn-warning">EDITAR</a>
+                        <input type="button" class="btn btn-danger boton-eliminar" value="ELIMINAR" registro-id="' . $row->id . '">
                 </div>  
                     ';
         })
@@ -95,7 +87,6 @@ class ClientesController extends Controller
      */
     public function store(ClientesStoreRequest $request)
     {   
-
         \Cliente::create( $request->all() );
 
         return redirect()->route("clientes.index")->withSuccess( "El cliente se creo correctamente." );
@@ -152,6 +143,13 @@ class ClientesController extends Controller
         \Cliente::find( $id )->delete();
 
         return redirect()->route("clientes.index");
+    }
+
+    public function destroy_ajax($id)
+    {
+        \Cliente::find( $id )->delete();
+
+        return response()->json(['error' => false]);
     }
 
 
